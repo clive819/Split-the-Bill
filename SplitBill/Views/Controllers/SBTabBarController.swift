@@ -30,7 +30,7 @@ class SBTabBarController: UITabBarController {
     private func createAddBillVC() -> UINavigationController {
         let addBillVC = AddItemsVC()
         addBillVC.title = "Add Items"
-        addBillVC.tabBarItem = UITabBarItem(title: "Add Items", image: SFSymbols.person, tag: 1)
+        addBillVC.tabBarItem = UITabBarItem(title: "Add Items", image: SFSymbols.addBill, tag: 1)
         
         let navController = UINavigationController(rootViewController: addBillVC)
         navController.navigationBar.prefersLargeTitles = true
