@@ -346,6 +346,7 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
         })
         
         textRecognitionRequest.recognitionLevel = .accurate
+        textRecognitionRequest.recognitionLanguages = ["en-US"]
         textRecognitionRequest.usesLanguageCorrection = true
     }
     
