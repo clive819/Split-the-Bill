@@ -364,12 +364,9 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
         for observation in observations {
             guard let candidate = observation.topCandidates(1).first else { continue }
             
-            if candidate.string.contains("SUBTOTAL") {
-                break
-            }
+            let centerY = (observation.boundingBox.minY + observation.boundingBox.maxY) / 2
             
-            if let rect = rects.last,
-               (min(rect.maxY, observation.boundingBox.maxY) - max(rect.minY, observation.boundingBox.minY)) > 0.005 {
+            if let rect = rects.last, rect.minY <= centerY, centerY <= rect.maxY {
                 lines[lines.count - 1].append(candidate)
             }else {
                 rects.append(observation.boundingBox)
@@ -408,6 +405,10 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
                 }else {
                     name += text.string
                 }
+            }
+            
+            if name.contains("SUBTOTAL") {
+                break
             }
             
             let item = Item(context: PersistenceManager.shared.context)
