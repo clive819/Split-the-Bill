@@ -12,7 +12,8 @@ import VisionKit
 class AddItemsVC: SBTableViewController {
     
     private let addItemsButton = SBButton(icon: SFSymbols.add)
-    private let pricePattern = "^-?\\d+\\.\\d{2}-?"
+    private let priceTagPattern = "^\\$?-?\\d+\\.\\d{2}-?"
+    private let pricePattern = "\\d+\\.\\d{2}"
     
     private var people = [Person]()
     private var textRecognitionRequest = VNRecognizeTextRequest()
@@ -399,7 +400,11 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
             for text in line {
                 if isPriceTag(text: text.string) {
                     let negative = text.string.contains("-")
-                    price = Float(text.string.replacingOccurrences(of: "-", with: "").split(separator: " ")[0])!
+                    
+                    price = extractPrice(text: text.string)
+                    
+                    if price == 0 { continue }
+                    
                     if negative {
                         price = -price
                     }
@@ -408,7 +413,7 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
                 }
             }
             
-            if name.contains("SUBTOTAL") {
+            if name.uppercased().contains("SUBTOTAL") {
                 break
             }
             
@@ -424,9 +429,23 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
         }
     }
     
-    private func isPriceTag(text: String) -> Bool {
+    private func extractPrice(text: String) -> Float {
         do {
             let regex = try NSRegularExpression(pattern: pricePattern, options: [])
+            if let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: text.count)) {
+                if let price = Float((text as NSString).substring(with: match.range)) {
+                    return price
+                }
+            }
+        } catch {
+            print(error)
+        }
+        return 0
+    }
+    
+    private func isPriceTag(text: String) -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: priceTagPattern, options: [])
             if let _ = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: text.count)) {
                 return true
             }
