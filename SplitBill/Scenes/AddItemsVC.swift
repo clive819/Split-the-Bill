@@ -403,8 +403,6 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
                     
                     price = extractPrice(text: text.string)
                     
-                    if price == 0 { continue }
-                    
                     if negative {
                         price = -price
                     }
@@ -412,6 +410,8 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
                     name += text.string
                 }
             }
+            
+            if price == 0 { continue }
             
             if name.uppercased().contains("SUBTOTAL") {
                 break
