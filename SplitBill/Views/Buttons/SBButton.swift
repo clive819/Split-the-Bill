@@ -10,6 +10,7 @@ import UIKit
 class SBButton: UIButton {
     
     private var icon: UIImage?
+    
 
     init(icon: UIImage?) {
         self.icon = icon

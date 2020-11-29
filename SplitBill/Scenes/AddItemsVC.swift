@@ -15,10 +15,9 @@ class AddItemsVC: SBTableViewController {
     private let priceTagPattern = "^\\$?-?\\d+\\.\\d{2}-?"
     private let pricePattern = "\\d+\\.\\d{2}"
     
+    private var items = [Item]()
     private var people = [Person]()
     private var textRecognitionRequest = VNRecognizeTextRequest()
-    
-    private var items = [Item]()
     
     private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
     

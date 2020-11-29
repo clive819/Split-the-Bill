@@ -15,6 +15,7 @@ class PersonCell: UITableViewCell {
     private let nameLabel = SBTitleLabel(textAlignment: .left, fontSize: 18)
     private let amountLabel = SBBodyLabel(textAlignment: .right)
     
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layoutUI()
