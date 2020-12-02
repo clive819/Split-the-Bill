@@ -14,6 +14,7 @@ class AddItemsVC: SBTableViewController {
     private let addItemsButton = SBButton(icon: SFSymbols.add)
     private let priceTagPattern = "^\\$?-?\\d+\\.\\d{2}-?"
     private let pricePattern = "\\d+\\.\\d{2}"
+    private let nonItemKeywords = ["total", "balance", "sales"]
     
     private var items = [Item]()
     private var people = [Person]()
@@ -412,9 +413,7 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
             
             if price == 0 { continue }
             
-            if name.uppercased().contains("SUBTOTAL") {
-                break
-            }
+            if noMoreItems(name) { break }
             
             let item = Item(context: PersistenceManager.shared.context)
             item.name = name
@@ -450,6 +449,16 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
             }
         } catch {
             print(error)
+        }
+        return false
+    }
+    
+    private func noMoreItems(_ text: String) -> Bool {
+        let text = text.lowercased()
+        for keyword in nonItemKeywords {
+            if text.contains(keyword) {
+                return true
+            }
         }
         return false
     }
