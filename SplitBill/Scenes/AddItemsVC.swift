@@ -12,7 +12,7 @@ import VisionKit
 class AddItemsVC: SBTableViewController {
     
     private let addItemsButton = SBButton(icon: SFSymbols.add)
-    private let priceTagPattern = "^\\$?-?\\d+\\.\\d{2}-?"
+    private let priceTagPattern = "^-?\\$?-?\\d+\\.\\d{2}-?"
     private let pricePattern = "\\d+\\.\\d{2}"
     private let nonItemKeywords = ["total", "balance", "sales"]
     
