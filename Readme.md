@@ -4,7 +4,7 @@ Automatically extract items in the receipt and calculate the splitting price.
 
 # Demo
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wDi9CfjBeFI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+https://www.youtube.com/watch?v=wDi9CfjBeFI
 
 # Screenshot
 
