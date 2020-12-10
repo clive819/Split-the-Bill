@@ -29,6 +29,13 @@ class AddItemsVC: SBTableViewController {
         configureTextRecognitionRequest()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        addItemsButton.makeCircle()
+        addItemsButton.drawShadow()
+    }
+    
     override func layoutUI() {
         super.layoutUI()
 

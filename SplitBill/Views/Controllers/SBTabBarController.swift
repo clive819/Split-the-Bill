@@ -26,8 +26,6 @@ class SBTabBarController: UITabBarController {
         peopleVC.tabBarItem = UITabBarItem(title: "People", image: SFSymbols.person, tag: 0)
         
         let navController = SBNavigationViewController(rootViewController: peopleVC)
-        // TODO: - make navbar round
-        
         
         return navController
     }

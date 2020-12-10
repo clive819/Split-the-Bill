@@ -25,11 +25,20 @@ class SBIconButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func makeCircle() {
+        layer.cornerRadius = bounds.width / 2
+    }
+
+}
+
+
+extension SBIconButton {
+    
     private func configure() {
+        backgroundColor = Colors.primaryBackground
         setImage(icon, for: .normal)
         contentVerticalAlignment = .fill
         contentHorizontalAlignment = .fill
-        drawShadow()
         useAutoLayout()
     }
     

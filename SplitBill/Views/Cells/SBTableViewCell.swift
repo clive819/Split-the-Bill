@@ -62,7 +62,9 @@ class SBTableViewCell: UITableViewCell {
         case .circle:
             indicatorView.image = SFSymbols.circle
         }
+        
         configureIndicatorView()
+        containerView.drawShadow()
     }
     
     func toggleSelection() {
@@ -107,7 +109,6 @@ extension SBTableViewCell {
         
         containerView.backgroundColor = Colors.secondaryBackground
         containerView.layer.cornerRadius = 15
-        containerView.drawShadow()
         containerView.useAutoLayout()
         
         configureStackView()

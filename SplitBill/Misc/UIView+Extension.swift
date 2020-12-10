@@ -21,12 +21,11 @@ extension UIView {
     }
     
     func drawShadow() {
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: layer.cornerRadius).cgPath
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.25
-        layer.shadowRadius = 40
-        layer.shadowOffset = CGSize(width: 0, height: 20)
-//        layer.shouldRasterize = true
-//        layer.rasterizationScale = UIScreen.main.scale
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowOpacity = 0.3
     }
     
 }

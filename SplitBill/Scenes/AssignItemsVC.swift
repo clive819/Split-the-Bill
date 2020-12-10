@@ -45,6 +45,13 @@ class AssignItemsVC: SBTableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        button.makeCircle()
+        button.drawShadow()
+    }
+    
     override func configureTableView() {
         super.configureTableView()
         
