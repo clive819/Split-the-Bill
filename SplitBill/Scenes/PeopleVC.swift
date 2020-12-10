@@ -7,15 +7,11 @@
 
 import UIKit
 
+
 class PeopleVC: SBTableViewController {
     
     private var people = [Person]()
     
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        loadData()
-    }
     
     override func layoutUI() {
         super.layoutUI()
@@ -28,35 +24,16 @@ class PeopleVC: SBTableViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(PersonCell.self, forCellReuseIdentifier: PersonCell.identifier)
     }
 
 }
 
 
 extension PeopleVC {
-
-    private func loadData() {
-        do {
-            people = try PersistenceManager.shared.context.fetch(Person.fetchRequest())
-            people.sort(by: {$0.name < $1.name})
-            
-            if people.isEmpty {
-                let person = Person(context: PersistenceManager.shared.context)
-                person.name = "Myself"
-                
-                people.append(person)
-            }
-            
-            tableView.reloadData()
-        } catch {
-            print("Failed to load data")
-        }
-    }
     
     private func personExist(name: String) -> Bool {
         for person in people {
-            if person.name == name {
+            if person.name.lowercased() == name.lowercased() {
                 return true
             }
         }
@@ -93,19 +70,29 @@ extension PeopleVC {
 extension PeopleVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        PersistenceManager.shared.loadPeople { [weak self] (result) in
+            switch result {
+            case .success(let people):
+                self?.people = people
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         return people.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PersonCell.identifier) as! PersonCell
-        cell.set(person: people[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: SBTableViewCell.identifier) as! SBTableViewCell
+        cell.set(object: people[indexPath.row], indicatorType: .bar, secondaryTextStyle: .amountOnly)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! SBTableViewCell
         let person = people[indexPath.row]
         let vc = PersonItemListVC(person: person)
         
+        cell.toggleSelection()
         tableView.deselectRow(at: indexPath, animated: true)
         navigationController?.pushViewController(vc, animated: true)
     }

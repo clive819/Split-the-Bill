@@ -9,15 +9,15 @@ import UIKit
 import Vision
 import VisionKit
 
+
 class AddItemsVC: SBTableViewController {
     
-    private let addItemsButton = SBButton(icon: SFSymbols.add)
+    private let addItemsButton = SBIconButton(icon: SFSymbols.action, tintColor: Colors.orange)
     private let priceTagPattern = "^-?\\$?-?\\d+\\.\\d{2}-?"
     private let pricePattern = "\\d+\\.\\d{2}"
     private let nonItemKeywords = ["total", "balance", "sales"]
     
     private var items = [Item]()
-    private var people = [Person]()
     private var textRecognitionRequest = VNRecognizeTextRequest()
     
     private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
@@ -29,16 +29,9 @@ class AddItemsVC: SBTableViewController {
         configureTextRecognitionRequest()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        loadPeople()
-    }
-    
     override func layoutUI() {
         super.layoutUI()
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: SFSymbols.action, style: .plain, target: self, action: #selector(actionButtonTapped))
-        
+
         configureAddItemsButton()
         configureActivityIndicator()
     }
@@ -48,7 +41,6 @@ class AddItemsVC: SBTableViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(AddItemCell.self, forCellReuseIdentifier: AddItemCell.identifier)
     }
 
 }
@@ -62,7 +54,7 @@ extension AddItemsVC {
         addItemsButton.addTarget(self, action: #selector(addItemsButtonTapped), for: .touchUpInside)
         
         let padding:CGFloat = 30
-        let size: CGFloat = 50
+        let size: CGFloat = 44
         
         NSLayoutConstraint.activate([
             addItemsButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
@@ -75,7 +67,7 @@ extension AddItemsVC {
     private func configureActivityIndicator() {
         view.addSubview(activityIndicator)
         
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.useAutoLayout()
         
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -83,56 +75,21 @@ extension AddItemsVC {
         ])
     }
     
-    private func loadPeople() {
-        do {
-            people = try PersistenceManager.shared.context.fetch(Person.fetchRequest())
-        } catch {
-            print("Failed to load people")
-        }
-    }
-    
-    @objc
-    private func actionButtonTapped() {
-        guard !activityIndicator.isAnimating else { return }
-        
-        let alert = UIAlertController(title: "Choose an action", message: nil, preferredStyle: .actionSheet)
-        
-        alert.addAction(UIAlertAction(title: "Assign", style: .default, handler: { [weak self] (_) in
-            self?.assign()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Edit Tax", style: .default, handler: { [weak self] (_) in
-            self?.editTax()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Delete All", style: .destructive, handler: { [weak self] (_) in
-            self?.clear()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Select All", style: .default, handler: { [weak self] (_) in
-            self?.select(all: true)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Deselect All", style: .default, handler: { [weak self] (_) in
-            self?.select(all: false)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive))
-        
-        present(alert, animated: true)
-    }
-    
     @objc
     private func addItemsButtonTapped() {
         guard !activityIndicator.isAnimating else { return }
         
-        let alert = UIAlertController(title: "Add items", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Choose an action", message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Manual", style: .default, handler: { [weak self] (_) in
-            self?.addItem()
+        alert.addAction(UIAlertAction(title: "Assign Items", style: .default, handler: { [weak self] (_) in
+            self?.assign()
         }))
         
-        alert.addAction(UIAlertAction(title: "Scan", style: .default, handler: { [weak self] (_) in
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (_) in
+            self?.addOrEditItem()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Scan Receipt", style: .default, handler: { [weak self] (_) in
             self?.scanReceipt()
         }))
         
@@ -140,97 +97,65 @@ extension AddItemsVC {
         
         present(alert, animated: true)
     }
-    
-    private func assign() {
-        let selected = items.filter({$0.itemSelected})
-        guard !selected.isEmpty else { return }
-        
-        let alert = UIAlertController(title: "Assign to", message: nil, preferredStyle: .actionSheet)
-        
-        for person in people {
-            alert.addAction(UIAlertAction(title: person.name, style: .default, handler: { (_) in
-                for item in selected {
-                    person.items.insert(item)
-                }
-            }))
-        }
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive))
-        
-        present(alert, animated: true)
-    }
-    
-    private func select(all state: Bool) {
-        for item in items {
-            item.itemSelected = state
-        }
-        tableView.reloadData()
-    }
-    
-    private func editTax() {
-        let selected = items.filter({$0.itemSelected})
-        guard !selected.isEmpty else { return }
-        
-        let alert = UIAlertController(title: "Change Tax", message: "change every selected items' tax to", preferredStyle: .alert)
+
+    private func addOrEditItem(_ item: Item? = nil) {
+        let alert = UIAlertController(title: "Item Info", message: nil, preferredStyle: .alert)
         
         alert.addTextField { (textField) in
-            textField.placeholder = "Tax % (Optional: default 0 %)"
+            textField.text = item?.identifier
+            textField.borderStyle = .roundedRect
+            textField.keyboardType = .alphabet
+            textField.clearButtonMode = .whileEditing
+            textField.placeholder = "Please enter item name"
+            textField.leftView = SBAlertLabel(message: "Name: ")
+            textField.leftViewMode = .always
+        }
+        
+        alert.addTextField { (textField) in
+            if let value = item?.value {
+                textField.text = "\(value)"
+            }
+            textField.borderStyle = .roundedRect
             textField.keyboardType = .decimalPad
+            textField.clearButtonMode = .whileEditing
+            textField.placeholder = "Please enter item value"
+            textField.leftView = SBAlertLabel(message: "Value: ")
+            textField.leftViewMode = .always
+        }
+        
+        alert.addTextField { (textField) in
+            if let tax = item?.tax {
+                textField.text = "\(tax)"
+            }
+            textField.borderStyle = .roundedRect
+            textField.placeholder = "Default 0 %"
+            textField.keyboardType = .decimalPad
+            textField.clearButtonMode = .whileEditing
+            textField.leftView = SBAlertLabel(message: "Tax: ")
+            textField.leftViewMode = .always
         }
         
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (_) in
-            guard let self = self,
-                  let taxString = alert.textFields?.first?.text
-            else { return }
-            
-            for item in selected {
-                item.tax = Float(taxString) ?? 0
-            }
-            self.tableView.reloadData()
-        }))
-        
-        present(alert, animated: true)
-    }
-    
-    private func clear() {
-        items.removeAll()
-        tableView.reloadData()
-    }
-
-    private func addItem() {
-        let alert = UIAlertController(title: "Add item", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "Item name"
-            textField.keyboardType = .alphabet
-        }
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "Item value"
-            textField.keyboardType = .decimalPad
-        }
-        
-        alert.addTextField { (textField) in
-            textField.placeholder = "Tax % (Optional: default 0 %)"
-            textField.keyboardType = .decimalPad
-        }
-        
-        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (_) in
             guard let self = self,
                   let name = alert.textFields?[0].text,
                   !name.isEmpty,
                   let valueText = alert.textFields?[1].text,
                   !valueText.isEmpty,
                   let value = Float(valueText),
-                  let taxTax = alert.textFields?[2].text
-            else { return }
+                  let tax = alert.textFields?[2].text
+            else {
+                UIDevice.vibrate()
+                return
+            }
             
-            let item = Item(context: PersistenceManager.shared.context)
-            item.name = name
-            item.value = value
-            item.tax = Float(taxTax) ?? 0
+            let newItem = item ?? Item(context: PersistenceManager.shared.context)
+            newItem.name = name
+            newItem.value = value
+            newItem.tax = Float(tax) ?? 0
             
-            self.items.append(item)
+            if item == nil {
+                self.items.append(newItem)
+            }
             self.tableView.reloadData()
             PersistenceManager.shared.saveContext()
         }))
@@ -241,13 +166,16 @@ extension AddItemsVC {
     private func scanReceipt() {
         let documentCameraVC = VNDocumentCameraViewController()
         documentCameraVC.delegate = self
-        
         present(documentCameraVC, animated: true)
     }
     
-    private func bringSubviewsToFront() {
-        view.bringSubviewToFront(activityIndicator)
-        view.bringSubviewToFront(addItemsButton)
+    private func assign() {
+        if items.isEmpty {
+            UIDevice.vibrate()
+        }else {
+            let vc = AssignItemsVC(items: items)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 }
@@ -257,30 +185,26 @@ extension AddItemsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if items.isEmpty {
-            DispatchQueue.main.async {
-                self.showEmptyStateView(message: "No items", in: self.view)
-                self.bringSubviewsToFront()
-            }
+            showEmptyStateView()
+            view.bringSubviewToFront(addItemsButton)
+            view.bringSubviewToFront(activityIndicator)
         }else {
-            DispatchQueue.main.async {
-                self.view.bringSubviewToFront(self.tableView)
-                self.bringSubviewsToFront()
-            }
+            hideEmptyStateView()
         }
-        
+
         return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AddItemCell.identifier) as! AddItemCell
-        cell.set(item: items[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: SBTableViewCell.identifier) as! SBTableViewCell
+        cell.set(object: items[indexPath.row], indicatorType: .bar, secondaryTextStyle: .includeTax)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! AddItemCell
-        cell.toggeSelection()
-        tableView.deselectRow(at: indexPath, animated: false)
+        let cell = tableView.cellForRow(at: indexPath) as! SBTableViewCell
+        cell.toggleSelection()
+        addOrEditItem(items[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

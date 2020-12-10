@@ -59,4 +59,22 @@ class PersistenceManager {
         }
     }
     
+    func loadPeople(completion: @escaping ((Result<[Person], Error>) -> Void)) {
+        do {
+            var result = try PersistenceManager.shared.context.fetch(Person.fetchRequest()) as [Person]
+            result.sort(by: {$0.name < $1.name})
+            
+            if result.isEmpty {
+                let person = Person(context: PersistenceManager.shared.context)
+                person.name = "Myself"
+                
+                result.append(person)
+            }
+            
+            completion(.success(result))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
 }

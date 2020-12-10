@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B50" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="name" attributeType="String"/>
         <attribute name="tax" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -7,12 +7,11 @@
         <relationship name="owners" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="items" inverseEntity="Person"/>
     </entity>
     <entity name="Person" representedClassName="Person" syncable="YES">
-        <attribute name="avatar" optional="YES" attributeType="Binary"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="items" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="owners" inverseEntity="Item"/>
     </entity>
     <elements>
         <element name="Item" positionX="83.8203125" positionY="-16.58203125" width="128" height="103"/>
-        <element name="Person" positionX="-128.8125" positionY="1.50390625" width="128" height="88"/>
+        <element name="Person" positionX="-128.8125" positionY="1.50390625" width="128" height="59"/>
     </elements>
 </model>

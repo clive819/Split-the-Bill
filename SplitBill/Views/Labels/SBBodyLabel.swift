@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class SBBodyLabel: UILabel {
 
     convenience init(textAlignment: NSTextAlignment) {
@@ -24,13 +25,13 @@ class SBBodyLabel: UILabel {
     }
     
     private func configure() {
-        textColor = .secondaryLabel
-        font = UIFont.preferredFont(forTextStyle: .body)
+        textColor = Colors.secondary
+        font = UIFont.preferredFont(forTextStyle: .footnote)
         adjustsFontForContentSizeCategory = true
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.75
         lineBreakMode = .byWordWrapping
-        translatesAutoresizingMaskIntoConstraints = false
+        useAutoLayout()
     }
 
 }

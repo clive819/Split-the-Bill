@@ -9,27 +9,46 @@
 import UIKit
 import CoreData
 
+
 @objc(Person)
 public class Person: NSManagedObject {
     
-    lazy var avatarImage: UIImage = {
-        guard let data = self.avatar, let image = UIImage(data: data) else {
-            return SFSymbols.person
-        }
-        return image.withTintColor(Colors.tintColor)
-    }()
+    private var selected = false
     
-    func amount() -> Float {
-        var ans: Float = 0
-        for item in items {
-            ans += item.amount()
-        }
-        return ans
-    }
     
     func reset() {
         items.removeAll()
         PersistenceManager.shared.saveContext()
+    }
+
+}
+
+
+extension Person: SBObject {
+    
+    var isSelected: Bool {
+        get {
+            return selected
+        }
+        set {
+            selected = newValue
+        }
+    }
+    
+    var identifier: String {
+        return name
+    }
+    
+    var amount: Float {
+        var ans: Float = 0
+        for item in items {
+            ans += item.amount
+        }
+        return ans
+    }
+    
+    var toll: Float {
+        return 0
     }
 
 }

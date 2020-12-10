@@ -7,16 +7,13 @@
 
 import UIKit
 
+
 class EmptyStateView: UIView {
     
-    private let messageLabel = SBTitleLabel(textAlignment: .center, fontSize: 28)
     private let logoImageView = UIImageView()
+    private let messageLabel = SBTitleLabel(textAlignment: .center, fontSize: 28)
+    private let stackView = UIStackView()
     
-    
-    convenience init(message: String) {
-        self.init(frame: .zero)
-        messageLabel.text = message
-    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,26 +25,27 @@ class EmptyStateView: UIView {
     }
     
     private func layoutUI() {
-        addSubviews(messageLabel, logoImageView)
+        addSubview(stackView)
         
-        messageLabel.numberOfLines = 3
-        messageLabel.textColor = .secondaryLabel
-
+        backgroundColor = Colors.primaryBackground
+        
+        stackView.addArrangedSubview(logoImageView)
+        stackView.addArrangedSubview(messageLabel)
+        
+        stackView.alignment = .center
+        stackView.axis = .vertical
+        stackView.useAutoLayout()
+        
         logoImageView.image = Assets.emptyStateLogo
-        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoImageView.contentMode = .scaleAspectFit
         
-        let padding: CGFloat = 40
-
+        messageLabel.text = "No Items"
+        
         NSLayoutConstraint.activate([
-            logoImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
-            logoImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
-            logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            
-            messageLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 20),
-            messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            messageLabel.heightAnchor.constraint(equalToConstant: 200),
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.widthAnchor.constraint(equalToConstant: 250),
+            stackView.heightAnchor.constraint(equalToConstant: 300),
         ])
     }
     

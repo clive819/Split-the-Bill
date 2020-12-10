@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		854BEACB25809F7C0011DD95 /* SBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854BEACA25809F7C0011DD95 /* SBObject.swift */; };
+		85C1316F258169F600A75ED4 /* SBNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1316E258169F600A75ED4 /* SBNavigationViewController.swift */; };
+		85C13174258181BA00A75ED4 /* AssignItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C13173258181BA00A75ED4 /* AssignItemsVC.swift */; };
+		85C13178258191A800A75ED4 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C13177258191A800A75ED4 /* UIDevice+Extension.swift */; };
+		85C131832581967A00A75ED4 /* SBIconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C131812581967A00A75ED4 /* SBIconButton.swift */; };
+		85C1318F2581B96F00A75ED4 /* SBAlertLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C1318E2581B96F00A75ED4 /* SBAlertLabel.swift */; };
 		89386BA2255C890800D7EA22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89386BA1255C890800D7EA22 /* AppDelegate.swift */; };
 		89386BA4255C890800D7EA22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89386BA3255C890800D7EA22 /* SceneDelegate.swift */; };
 		89386BAC255C890800D7EA22 /* SplitBill.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89386BAA255C890800D7EA22 /* SplitBill.xcdatamodeld */; };
@@ -14,21 +20,15 @@
 		89386BB1255C890A00D7EA22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89386BAF255C890A00D7EA22 /* LaunchScreen.storyboard */; };
 		89386BCB255C8A4C00D7EA22 /* PeopleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89386BCA255C8A4C00D7EA22 /* PeopleVC.swift */; };
 		89461B51256F8CFA00831B4D /* SBTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89461B50256F8CFA00831B4D /* SBTableViewController.swift */; };
-		89461B5525703C3600831B4D /* SBFootnoteLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89461B5425703C3600831B4D /* SBFootnoteLabel.swift */; };
 		8950C527256CD8EA00528354 /* SBTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C526256CD8EA00528354 /* SBTabBarController.swift */; };
 		8950C52D256CDB9F00528354 /* AddItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C52C256CDB9F00528354 /* AddItemsVC.swift */; };
 		8950C532256CDD4500528354 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C531256CDD4500528354 /* PersistenceManager.swift */; };
 		8950C53B256CE3DC00528354 /* Item+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C537256CE3DC00528354 /* Item+CoreDataClass.swift */; };
 		8950C53D256CE3DC00528354 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C539256CE3DC00528354 /* Person+CoreDataClass.swift */; };
 		8950C53E256CE3DC00528354 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8950C53A256CE3DC00528354 /* Person+CoreDataProperties.swift */; };
-		8980925E256DD74E0076F52E /* SBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980925D256DD74E0076F52E /* SBButton.swift */; };
-		89809262256DDCDF0076F52E /* AddItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89809261256DDCDF0076F52E /* AddItemCell.swift */; };
-		89809267256DE9580076F52E /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89809266256DE9580076F52E /* ItemCell.swift */; };
 		8980B97E256D96A500753A37 /* PersonItemListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8980B97D256D96A500753A37 /* PersonItemListVC.swift */; };
 		899A39B32570B4C500160395 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A39B22570B4C500160395 /* EmptyStateView.swift */; };
-		899A39B62570B63B00160395 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A39B52570B63B00160395 /* UIViewController+Extension.swift */; };
-		89BDE064255C8E9E009AD577 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDE063255C8E9E009AD577 /* PersonCell.swift */; };
-		89BDE068255C8F86009AD577 /* SBImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDE067255C8F86009AD577 /* SBImageView.swift */; };
+		89BDE064255C8E9E009AD577 /* SBTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDE063255C8E9E009AD577 /* SBTableViewCell.swift */; };
 		89BDE06D255C9118009AD577 /* SBBodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDE06C255C9118009AD577 /* SBBodyLabel.swift */; };
 		89BDE079255C9260009AD577 /* SBTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDE078255C9260009AD577 /* SBTitleLabel.swift */; };
 		89BDE081255C9433009AD577 /* SBConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BDE080255C9433009AD577 /* SBConstants.swift */; };
@@ -37,6 +37,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		854BEACA25809F7C0011DD95 /* SBObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBObject.swift; sourceTree = "<group>"; };
+		85C1316E258169F600A75ED4 /* SBNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBNavigationViewController.swift; sourceTree = "<group>"; };
+		85C13173258181BA00A75ED4 /* AssignItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignItemsVC.swift; sourceTree = "<group>"; };
+		85C13177258191A800A75ED4 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		85C131812581967A00A75ED4 /* SBIconButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SBIconButton.swift; sourceTree = "<group>"; };
+		85C1318E2581B96F00A75ED4 /* SBAlertLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBAlertLabel.swift; sourceTree = "<group>"; };
 		89386B9E255C890800D7EA22 /* SplitBill.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SplitBill.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89386BA1255C890800D7EA22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89386BA3255C890800D7EA22 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,21 +52,15 @@
 		89386BB2255C890A00D7EA22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89386BCA255C8A4C00D7EA22 /* PeopleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleVC.swift; sourceTree = "<group>"; };
 		89461B50256F8CFA00831B4D /* SBTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBTableViewController.swift; sourceTree = "<group>"; };
-		89461B5425703C3600831B4D /* SBFootnoteLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBFootnoteLabel.swift; sourceTree = "<group>"; };
 		8950C526256CD8EA00528354 /* SBTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBTabBarController.swift; sourceTree = "<group>"; };
 		8950C52C256CDB9F00528354 /* AddItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemsVC.swift; sourceTree = "<group>"; };
 		8950C531256CDD4500528354 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		8950C537256CE3DC00528354 /* Item+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8950C539256CE3DC00528354 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8950C53A256CE3DC00528354 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8980925D256DD74E0076F52E /* SBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBButton.swift; sourceTree = "<group>"; };
-		89809261256DDCDF0076F52E /* AddItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCell.swift; sourceTree = "<group>"; };
-		89809266256DE9580076F52E /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		8980B97D256D96A500753A37 /* PersonItemListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonItemListVC.swift; sourceTree = "<group>"; };
 		899A39B22570B4C500160395 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
-		899A39B52570B63B00160395 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		89BDE063255C8E9E009AD577 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
-		89BDE067255C8F86009AD577 /* SBImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBImageView.swift; sourceTree = "<group>"; };
+		89BDE063255C8E9E009AD577 /* SBTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBTableViewCell.swift; sourceTree = "<group>"; };
 		89BDE06C255C9118009AD577 /* SBBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBBodyLabel.swift; sourceTree = "<group>"; };
 		89BDE078255C9260009AD577 /* SBTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBTitleLabel.swift; sourceTree = "<group>"; };
 		89BDE080255C9433009AD577 /* SBConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBConstants.swift; sourceTree = "<group>"; };
@@ -79,6 +79,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		854BEAC425809D470011DD95 /* Protocal */ = {
+			isa = PBXGroup;
+			children = (
+				854BEACA25809F7C0011DD95 /* SBObject.swift */,
+			);
+			path = Protocal;
+			sourceTree = "<group>";
+		};
+		85C1317F2581967A00A75ED4 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				85C131812581967A00A75ED4 /* SBIconButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		89386B95255C890800D7EA22 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +116,7 @@
 			children = (
 				89386BBD255C894C00D7EA22 /* Misc */,
 				8950C52F256CDCA500528354 /* Managers */,
+				854BEAC425809D470011DD95 /* Protocal */,
 				89386BBB255C893D00D7EA22 /* Models */,
 				89386BB9255C892000D7EA22 /* Views */,
 				89386BBA255C892800D7EA22 /* Scenes */,
@@ -110,10 +127,9 @@
 		89386BB9255C892000D7EA22 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8980925C256DD7360076F52E /* Buttons */,
+				85C1317F2581967A00A75ED4 /* Buttons */,
 				89809269256DECF60076F52E /* Cells */,
 				8950C525256CD8C800528354 /* Controllers */,
-				89BDE066255C8F71009AD577 /* ImageViews */,
 				89BDE06B255C9104009AD577 /* Labels */,
 				899A39B12570B48D00160395 /* Views */,
 			);
@@ -124,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				8950C52C256CDB9F00528354 /* AddItemsVC.swift */,
+				85C13173258181BA00A75ED4 /* AssignItemsVC.swift */,
 				89386BCA255C8A4C00D7EA22 /* PeopleVC.swift */,
 				8980B97D256D96A500753A37 /* PersonItemListVC.swift */,
 			);
@@ -148,7 +165,7 @@
 				89386BA3255C890800D7EA22 /* SceneDelegate.swift */,
 				89BDE080255C9433009AD577 /* SBConstants.swift */,
 				89BDE083255C94F1009AD577 /* UIView+Extension.swift */,
-				899A39B52570B63B00160395 /* UIViewController+Extension.swift */,
+				85C13177258191A800A75ED4 /* UIDevice+Extension.swift */,
 				89386BAD255C890A00D7EA22 /* Assets.xcassets */,
 				89386BAF255C890A00D7EA22 /* LaunchScreen.storyboard */,
 				89386BB2255C890A00D7EA22 /* Info.plist */,
@@ -162,6 +179,7 @@
 			children = (
 				8950C526256CD8EA00528354 /* SBTabBarController.swift */,
 				89461B50256F8CFA00831B4D /* SBTableViewController.swift */,
+				85C1316E258169F600A75ED4 /* SBNavigationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -174,20 +192,10 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		8980925C256DD7360076F52E /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				8980925D256DD74E0076F52E /* SBButton.swift */,
-			);
-			path = Buttons;
-			sourceTree = "<group>";
-		};
 		89809269256DECF60076F52E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				89BDE063255C8E9E009AD577 /* PersonCell.swift */,
-				89809266256DE9580076F52E /* ItemCell.swift */,
-				89809261256DDCDF0076F52E /* AddItemCell.swift */,
+				89BDE063255C8E9E009AD577 /* SBTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -200,20 +208,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		89BDE066255C8F71009AD577 /* ImageViews */ = {
-			isa = PBXGroup;
-			children = (
-				89BDE067255C8F86009AD577 /* SBImageView.swift */,
-			);
-			path = ImageViews;
-			sourceTree = "<group>";
-		};
 		89BDE06B255C9104009AD577 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
 				89BDE078255C9260009AD577 /* SBTitleLabel.swift */,
 				89BDE06C255C9118009AD577 /* SBBodyLabel.swift */,
-				89461B5425703C3600831B4D /* SBFootnoteLabel.swift */,
+				85C1318E2581B96F00A75ED4 /* SBAlertLabel.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -289,29 +289,29 @@
 			files = (
 				8980B97E256D96A500753A37 /* PersonItemListVC.swift in Sources */,
 				8950C53D256CE3DC00528354 /* Person+CoreDataClass.swift in Sources */,
-				89461B5525703C3600831B4D /* SBFootnoteLabel.swift in Sources */,
 				89BDE084255C94F1009AD577 /* UIView+Extension.swift in Sources */,
 				89BDE081255C9433009AD577 /* SBConstants.swift in Sources */,
 				8950C52D256CDB9F00528354 /* AddItemsVC.swift in Sources */,
-				89BDE064255C8E9E009AD577 /* PersonCell.swift in Sources */,
+				89BDE064255C8E9E009AD577 /* SBTableViewCell.swift in Sources */,
 				8950C53E256CE3DC00528354 /* Person+CoreDataProperties.swift in Sources */,
 				89EC223B256D8D350050A1A6 /* Item+CoreDataProperties.swift in Sources */,
 				8950C532256CDD4500528354 /* PersistenceManager.swift in Sources */,
 				8950C527256CD8EA00528354 /* SBTabBarController.swift in Sources */,
 				8950C53B256CE3DC00528354 /* Item+CoreDataClass.swift in Sources */,
-				89809267256DE9580076F52E /* ItemCell.swift in Sources */,
-				899A39B62570B63B00160395 /* UIViewController+Extension.swift in Sources */,
 				89386BAC255C890800D7EA22 /* SplitBill.xcdatamodeld in Sources */,
+				85C13178258191A800A75ED4 /* UIDevice+Extension.swift in Sources */,
 				89461B51256F8CFA00831B4D /* SBTableViewController.swift in Sources */,
 				89386BCB255C8A4C00D7EA22 /* PeopleVC.swift in Sources */,
+				85C1316F258169F600A75ED4 /* SBNavigationViewController.swift in Sources */,
+				85C13174258181BA00A75ED4 /* AssignItemsVC.swift in Sources */,
+				854BEACB25809F7C0011DD95 /* SBObject.swift in Sources */,
+				85C1318F2581B96F00A75ED4 /* SBAlertLabel.swift in Sources */,
 				89386BA2255C890800D7EA22 /* AppDelegate.swift in Sources */,
-				8980925E256DD74E0076F52E /* SBButton.swift in Sources */,
 				899A39B32570B4C500160395 /* EmptyStateView.swift in Sources */,
-				89BDE068255C8F86009AD577 /* SBImageView.swift in Sources */,
-				89809262256DDCDF0076F52E /* AddItemCell.swift in Sources */,
 				89BDE079255C9260009AD577 /* SBTitleLabel.swift in Sources */,
 				89386BA4255C890800D7EA22 /* SceneDelegate.swift in Sources */,
 				89BDE06D255C9118009AD577 /* SBBodyLabel.swift in Sources */,
+				85C131832581967A00A75ED4 /* SBIconButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,7 +458,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.clive819.SplitBill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -479,7 +479,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.clive819.SplitBill;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -16,4 +16,17 @@ extension UIView {
         }
     }
     
+    func useAutoLayout() {
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func drawShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.25
+        layer.shadowRadius = 40
+        layer.shadowOffset = CGSize(width: 0, height: 20)
+//        layer.shouldRasterize = true
+//        layer.rasterizationScale = UIScreen.main.scale
+    }
+    
 }

@@ -7,7 +7,10 @@
 
 import UIKit
 
+
 class SBTableViewController: UIViewController {
+    
+    private lazy var emptyStateView = EmptyStateView(frame: view.bounds)
     
     let tableView = UITableView()
     
@@ -16,14 +19,15 @@ class SBTableViewController: UIViewController {
         super.viewDidLoad()
         layoutUI()
     }
-}
-
-
-extension SBTableViewController {
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
     
     @objc
     func layoutUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = Colors.primaryBackground
         configureTableView()
     }
     
@@ -31,10 +35,21 @@ extension SBTableViewController {
     func configureTableView() {
         view.addSubview(tableView)
         
-        tableView.rowHeight = 80
+        tableView.rowHeight = 96
         tableView.frame = view.bounds
         tableView.isUserInteractionEnabled = true
         tableView.tableFooterView = UIView(frame: .zero)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = Colors.primaryBackground
+        tableView.register(SBTableViewCell.self, forCellReuseIdentifier: SBTableViewCell.identifier)
+    }
+    
+    func showEmptyStateView() {
+        view.addSubview(emptyStateView)
+    }
+    
+    func hideEmptyStateView() {
+        emptyStateView.removeFromSuperview()
     }
 
 }

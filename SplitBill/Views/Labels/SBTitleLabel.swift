@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class SBTitleLabel: UILabel {
 
     convenience init(textAlignment: NSTextAlignment, fontSize: CGFloat) {
@@ -25,11 +26,11 @@ class SBTitleLabel: UILabel {
     }
     
     private func configure() {
-        textColor = .label
+        textColor = Colors.primary
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
         lineBreakMode = .byTruncatingTail
-        translatesAutoresizingMaskIntoConstraints = false
+        useAutoLayout()
     }
 
 }

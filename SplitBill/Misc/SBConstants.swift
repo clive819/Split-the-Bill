@@ -9,17 +9,25 @@ import UIKit
 
 
 enum SFSymbols {
-    static let person = UIImage(systemName: "person.crop.circle")!
-    static let addBill = UIImage(systemName: "note.text.badge.plus")
+    static let person = UIImage(systemName: "person.2.fill")!
+    static let addToCart = UIImage(systemName: "cart.fill.badge.plus")
     static let add = UIImage(systemName: "plus.circle.fill")
     static let circle = UIImage(systemName: "circle")
-    static let check = UIImage(systemName: "checkmark.circle.fill")
-    static let action = UIImage(systemName: "ellipsis.circle")
+    static let markedCircle = UIImage(systemName: "largecircle.fill.circle")
+    static let action = UIImage(systemName: "ellipsis.circle.fill")
+    static let checkMark = UIImage(systemName: "checkmark.circle.fill")
 }
 
 
 enum Colors {
-    static let tintColor = UIColor(named: "TintColor")!
+    static let red = UIColor(named: "Red")!
+    static let orange = UIColor(named: "Orange")!
+    static let blue = UIColor(named: "Blue")!
+    static let tint = UIColor(named: "Tint")!
+    static let primary = UIColor(named: "Primary")!
+    static let secondary = UIColor(named: "Secondary")!
+    static let primaryBackground = UIColor(named: "Primary Background")!
+    static let secondaryBackground = UIColor(named: "Secondary Background")!
 }
 
 
