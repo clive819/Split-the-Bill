@@ -40,6 +40,11 @@ class SBTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        containerView.drawShadow()
+    }
 
     func set(object: SBObject, indicatorType: IndicatorType, secondaryTextStyle: SecondaryTextStyle) {
         self.object = object
@@ -64,7 +69,6 @@ class SBTableViewCell: UITableViewCell {
         }
         
         configureIndicatorView()
-        containerView.drawShadow()
     }
     
     func toggleSelection() {

@@ -45,8 +45,8 @@ class AssignItemsVC: SBTableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         button.makeCircle()
         button.drawShadow()
@@ -85,15 +85,20 @@ extension AssignItemsVC {
     @objc
     private func moveToNextStage() {
         guard !selectedItems.isEmpty else {
+            shakeTableView()
             UIDevice.vibrate()
             return
         }
         
+        button.removeTarget(self, action: #selector(self.moveToNextStage), for: .touchUpInside)
+        button.addTarget(self, action: #selector(self.assign), for: .touchUpInside)
+        
+        stage = .selectPeople
+        
         tableView.transform = CGAffineTransform(translationX: view.frame.width, y: 0)
+        
         UIView.animate(withDuration: 0.3) {
             self.title = "Choose People"
-            self.button.addTarget(self, action: #selector(self.assign), for: .touchUpInside)
-            self.stage = .selectPeople
             self.tableView.rowHeight = 72
             self.tableView.transform = .identity
             self.tableView.reloadData()
@@ -103,19 +108,20 @@ extension AssignItemsVC {
     @objc
     private func assign() {
         guard !selectedPeople.isEmpty else {
+            shakeTableView()
             UIDevice.vibrate()
             return
         }
         
-        for person in selectedPeople {
-            for item in selectedItems {
-                person.items.insert(item)
-            }
-            person.isSelected = false
-        }
+        let peopleSet = Set(selectedPeople)
         
         for item in selectedItems {
+            item.addToOwners(peopleSet)
             item.isSelected = false
+        }
+        
+        for person in selectedPeople {
+            person.isSelected = false
         }
         
         navigationController?.popViewController(animated: true)
