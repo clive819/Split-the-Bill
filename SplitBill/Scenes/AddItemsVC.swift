@@ -193,8 +193,6 @@ extension AddItemsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if items.isEmpty {
             showEmptyStateView()
-            view.bringSubviewToFront(addItemsButton)
-            view.bringSubviewToFront(activityIndicator)
         }else {
             hideEmptyStateView()
         }

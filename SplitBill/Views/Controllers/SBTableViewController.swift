@@ -46,6 +46,8 @@ class SBTableViewController: UIViewController {
     
     func showEmptyStateView() {
         view.addSubview(emptyStateView)
+        view.sendSubviewToBack(emptyStateView)
+        view.sendSubviewToBack(tableView)
     }
     
     func hideEmptyStateView() {
