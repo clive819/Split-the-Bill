@@ -27,6 +27,7 @@ class AddItemsVC: SBTableViewController {
         super.viewDidLoad()
         
         configureTextRecognitionRequest()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: nil, action: nil)
     }
     
     override func viewDidLayoutSubviews() {

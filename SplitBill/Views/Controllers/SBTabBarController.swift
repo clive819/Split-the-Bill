@@ -23,7 +23,7 @@ class SBTabBarController: UITabBarController {
     private func createPersonVC() -> UINavigationController {
         let peopleVC = PeopleVC()
         peopleVC.title = "People"
-        peopleVC.tabBarItem = UITabBarItem(title: "People", image: SFSymbols.person, tag: 0)
+        peopleVC.tabBarItem = UITabBarItem(title: "People", image: SFSymbols.people, tag: 0)
         
         let navController = SBNavigationViewController(rootViewController: peopleVC)
         
@@ -46,6 +46,8 @@ class SBTabBarController: UITabBarController {
         UINavigationBar.appearance().prefersLargeTitles = true
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: Colors.primary]
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: Colors.primary]
+        UINavigationBar.appearance().backIndicatorImage = SFSymbols.leftArrow
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = SFSymbols.leftArrow
     }
 
 }

@@ -9,13 +9,14 @@ import UIKit
 
 
 enum SFSymbols {
-    static let person = UIImage(systemName: "person.2.fill")!
+    static let people = UIImage(systemName: "person.2.fill")!
     static let addToCart = UIImage(systemName: "cart.fill.badge.plus")
     static let add = UIImage(systemName: "plus.circle.fill")
     static let circle = UIImage(systemName: "circle")
     static let markedCircle = UIImage(systemName: "largecircle.fill.circle")
     static let action = UIImage(systemName: "ellipsis.circle.fill")
     static let checkMark = UIImage(systemName: "checkmark.circle.fill")
+    static let leftArrow = UIImage(systemName: "arrow.left")
 }
 
 

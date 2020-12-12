@@ -16,7 +16,7 @@ class PeopleVC: SBTableViewController {
     override func layoutUI() {
         super.layoutUI()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPerson))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: SFSymbols.add, style: .plain, target: self, action: #selector(addPerson))
     }
     
     override func configureTableView() {
@@ -24,6 +24,12 @@ class PeopleVC: SBTableViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
 }
