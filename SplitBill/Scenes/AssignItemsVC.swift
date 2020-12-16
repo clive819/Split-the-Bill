@@ -18,7 +18,7 @@ class AssignItemsVC: SBTableViewController {
     private let padding: CGFloat = 16
     private let buttonHeight: CGFloat = 44
     private let buttonWidth: CGFloat = 300
-    private let button = SBIconButton(icon: SFSymbols.checkMark, tintColor: Colors.red)
+    private let button = SBIconButton(icon: SFSymbols.checkMark, tintColor: Colors.orange)
     private let items: [Item]
     
     private var people: [Person]!
@@ -64,9 +64,9 @@ class AssignItemsVC: SBTableViewController {
 }
 
 
-extension AssignItemsVC {
+private extension AssignItemsVC {
     
-    private func configureButton() {
+    func configureButton() {
         view.addSubview(button)
         
         button.addTarget(self, action: #selector(moveToNextStage), for: .touchUpInside)
@@ -83,7 +83,7 @@ extension AssignItemsVC {
     }
     
     @objc
-    private func moveToNextStage() {
+    func moveToNextStage() {
         guard !selectedItems.isEmpty else {
             shakeTableView()
             UIDevice.vibrate()
@@ -106,7 +106,7 @@ extension AssignItemsVC {
     }
     
     @objc
-    private func assign() {
+    func assign() {
         guard !selectedPeople.isEmpty else {
             shakeTableView()
             UIDevice.vibrate()

@@ -39,15 +39,15 @@ extension Person: SBObject {
         return name
     }
     
-    var amount: Float {
-        var ans: Float = 0
+    var amount: Double {
+        var ans: Double = 0
         for item in items {
             ans += item.amount
         }
         return ans
     }
     
-    var toll: Float {
+    var toll: Double {
         return 0
     }
 

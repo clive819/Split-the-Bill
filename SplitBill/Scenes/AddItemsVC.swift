@@ -12,7 +12,7 @@ import VisionKit
 
 class AddItemsVC: SBTableViewController {
     
-    private let addItemsButton = SBIconButton(icon: SFSymbols.action, tintColor: Colors.orange)
+    private let actionButton = SBIconButton(icon: SFSymbols.action, tintColor: Colors.orange)
     private let priceTagPattern = "^-?\\$?-?\\d+\\.\\d{2}-?"
     private let pricePattern = "\\d+\\.\\d{2}"
     private let nonItemKeywords = ["total", "balance", "sales"]
@@ -33,8 +33,8 @@ class AddItemsVC: SBTableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        addItemsButton.makeCircle()
-        addItemsButton.drawShadow()
+        actionButton.makeCircle()
+        actionButton.drawShadow()
     }
     
     override func layoutUI() {
@@ -54,25 +54,25 @@ class AddItemsVC: SBTableViewController {
 }
 
 
-extension AddItemsVC {
+private extension AddItemsVC {
 
-    private func configureAddItemsButton() {
-        view.addSubview(addItemsButton)
+    func configureAddItemsButton() {
+        view.addSubview(actionButton)
         
-        addItemsButton.addTarget(self, action: #selector(addItemsButtonTapped), for: .touchUpInside)
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
         
         let padding:CGFloat = 30
         let size: CGFloat = 44
         
         NSLayoutConstraint.activate([
-            addItemsButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
-            addItemsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
-            addItemsButton.widthAnchor.constraint(equalToConstant: size),
-            addItemsButton.heightAnchor.constraint(equalToConstant: size)
+            actionButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -padding),
+            actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
+            actionButton.widthAnchor.constraint(equalToConstant: size),
+            actionButton.heightAnchor.constraint(equalToConstant: size)
         ])
     }
     
-    private func configureActivityIndicator() {
+    func configureActivityIndicator() {
         view.addSubview(activityIndicator)
         
         activityIndicator.useAutoLayout()
@@ -84,7 +84,7 @@ extension AddItemsVC {
     }
     
     @objc
-    private func addItemsButtonTapped() {
+    func actionButtonTapped() {
         guard !activityIndicator.isAnimating else { return }
         
         let alert = UIAlertController(title: "Choose an action", message: nil, preferredStyle: .actionSheet)
@@ -94,7 +94,9 @@ extension AddItemsVC {
         }))
         
         alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (_) in
-            self?.addOrEditItem()
+            self?.addOrEditItem(nil, { (item) in
+                self?.items.append(item)
+            })
         }))
         
         alert.addAction(UIAlertAction(title: "Scan Receipt", style: .default, handler: { [weak self] (_) in
@@ -106,78 +108,15 @@ extension AddItemsVC {
         present(alert, animated: true)
     }
 
-    private func addOrEditItem(_ item: Item? = nil) {
-        let alert = UIAlertController(title: "Item Info", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField { (textField) in
-            textField.text = item?.identifier
-            textField.borderStyle = .roundedRect
-            textField.keyboardType = .alphabet
-            textField.clearButtonMode = .whileEditing
-            textField.placeholder = "Please enter item name"
-            textField.leftView = SBAlertLabel(message: "Name: ")
-            textField.leftViewMode = .always
-        }
-        
-        alert.addTextField { (textField) in
-            if let value = item?.value {
-                textField.text = "\(value)"
-            }
-            textField.borderStyle = .roundedRect
-            textField.keyboardType = .decimalPad
-            textField.clearButtonMode = .whileEditing
-            textField.placeholder = "Please enter item value"
-            textField.leftView = SBAlertLabel(message: "Value: ")
-            textField.leftViewMode = .always
-        }
-        
-        alert.addTextField { (textField) in
-            if let tax = item?.tax {
-                textField.text = "\(tax)"
-            }
-            textField.borderStyle = .roundedRect
-            textField.placeholder = "Default 0 %"
-            textField.keyboardType = .decimalPad
-            textField.clearButtonMode = .whileEditing
-            textField.leftView = SBAlertLabel(message: "Tax: ")
-            textField.leftViewMode = .always
-        }
-        
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (_) in
-            guard let self = self,
-                  let name = alert.textFields?[0].text,
-                  !name.isEmpty,
-                  let valueText = alert.textFields?[1].text,
-                  !valueText.isEmpty,
-                  let value = Float(valueText),
-                  let tax = alert.textFields?[2].text
-            else {
-                UIDevice.vibrate()
-                return
-            }
-            
-            let newItem = item ?? Item(context: PersistenceManager.shared.context)
-            newItem.name = name
-            newItem.value = value
-            newItem.tax = Float(tax) ?? 0
-            
-            if item == nil {
-                self.items.append(newItem)
-            }
-            self.tableView.reloadData()
-            PersistenceManager.shared.saveContext()
-        }))
-        
-        present(alert, animated: true)
-    }
     
-    private func scanReceipt() {
+    
+    func scanReceipt() {
         let documentCameraVC = VNDocumentCameraViewController()
         documentCameraVC.delegate = self
         present(documentCameraVC, animated: true)
     }
     
-    private func assign() {
+    func assign() {
         if items.isEmpty {
             UIDevice.vibrate()
         }else {
@@ -210,7 +149,9 @@ extension AddItemsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! SBTableViewCell
         cell.toggleSelection()
-        addOrEditItem(items[indexPath.row])
+        addOrEditItem(items[indexPath.row]) { [weak self] (item) in
+            self?.items[indexPath.row] = item
+        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -325,7 +266,7 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
     private func addRecognizedText(_ lines: [[VNRecognizedText]]) {
         for line in lines {
             var name = ""
-            var price: Float = 0
+            var price: Double = 0
             
             for text in line {
                 if isPriceTag(text: text.string) {
@@ -357,11 +298,11 @@ extension AddItemsVC: VNDocumentCameraViewControllerDelegate {
         }
     }
     
-    private func extractPrice(text: String) -> Float {
+    private func extractPrice(text: String) -> Double {
         do {
             let regex = try NSRegularExpression(pattern: pricePattern, options: [])
             if let match = regex.firstMatch(in: text, options: [], range: NSRange(location: 0, length: text.count)) {
-                if let price = Float((text as NSString).substring(with: match.range)) {
+                if let price = Double((text as NSString).substring(with: match.range)) {
                     return price
                 }
             }

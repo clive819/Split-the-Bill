@@ -64,5 +64,67 @@ class SBTableViewController: UIViewController {
 
         tableView.layer.add(animation, forKey: "position")
     }
+    
+    func addOrEditItem(_ item: Item? = nil, _ completion: @escaping ((Item) -> Void)) {
+        let alert = UIAlertController(title: "Item Info", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.text = item?.identifier
+            textField.borderStyle = .roundedRect
+            textField.keyboardType = .alphabet
+            textField.clearButtonMode = .whileEditing
+            textField.placeholder = "Please enter item name"
+            textField.leftView = SBAlertLabel(message: "Name: ")
+            textField.leftViewMode = .always
+        }
+        
+        alert.addTextField { (textField) in
+            if let value = item?.value {
+                textField.text = "\(value)"
+            }
+            textField.borderStyle = .roundedRect
+            textField.keyboardType = .decimalPad
+            textField.clearButtonMode = .whileEditing
+            textField.placeholder = "Please enter item value"
+            textField.leftView = SBAlertLabel(message: "Value: ")
+            textField.leftViewMode = .always
+        }
+        
+        alert.addTextField { (textField) in
+            if let tax = item?.tax {
+                textField.text = "\(tax)"
+            }
+            textField.borderStyle = .roundedRect
+            textField.placeholder = "Default 0 %"
+            textField.keyboardType = .decimalPad
+            textField.clearButtonMode = .whileEditing
+            textField.leftView = SBAlertLabel(message: "Tax: ")
+            textField.leftViewMode = .always
+        }
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] (_) in
+            guard let name = alert.textFields?[0].text,
+                  !name.isEmpty,
+                  let valueText = alert.textFields?[1].text,
+                  !valueText.isEmpty,
+                  let value = Double(valueText),
+                  let tax = alert.textFields?[2].text
+            else {
+                UIDevice.vibrate()
+                return
+            }
+            
+            let newItem = item ?? Item(context: PersistenceManager.shared.context)
+            newItem.name = name
+            newItem.value = value
+            newItem.tax = Double(tax) ?? 0
+            
+            completion(newItem)
+            self?.tableView.reloadData()
+            PersistenceManager.shared.saveContext()
+        }))
+        
+        present(alert, animated: true)
+    }
 
 }

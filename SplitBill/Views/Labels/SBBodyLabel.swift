@@ -23,6 +23,11 @@ class SBBodyLabel: UILabel {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+}
+
+
+private extension SBBodyLabel {
     
     private func configure() {
         textColor = Colors.secondary
@@ -33,5 +38,5 @@ class SBBodyLabel: UILabel {
         lineBreakMode = .byWordWrapping
         useAutoLayout()
     }
-
+    
 }

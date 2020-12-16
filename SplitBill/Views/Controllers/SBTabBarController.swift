@@ -19,8 +19,12 @@ class SBTabBarController: UITabBarController {
         
         configureNavigationBar()
     }
+
+}
+
+private extension SBTabBarController {
     
-    private func createPersonVC() -> UINavigationController {
+    func createPersonVC() -> UINavigationController {
         let peopleVC = PeopleVC()
         peopleVC.title = "People"
         peopleVC.tabBarItem = UITabBarItem(title: "People", image: SFSymbols.people, tag: 0)
@@ -30,7 +34,7 @@ class SBTabBarController: UITabBarController {
         return navController
     }
     
-    private func createAddBillVC() -> UINavigationController {
+    func createAddBillVC() -> UINavigationController {
         let addBillVC = AddItemsVC()
         addBillVC.title = "Add Items"
         addBillVC.tabBarItem = UITabBarItem(title: "Add Items", image: SFSymbols.addToCart, tag: 1)
@@ -40,7 +44,7 @@ class SBTabBarController: UITabBarController {
         return navController
     }
     
-    private func configureNavigationBar() {
+    func configureNavigationBar() {
         UINavigationBar.appearance().tintColor = Colors.primary
         UINavigationBar.appearance().barTintColor = Colors.primaryBackground
         UINavigationBar.appearance().prefersLargeTitles = true
@@ -49,5 +53,5 @@ class SBTabBarController: UITabBarController {
         UINavigationBar.appearance().backIndicatorImage = SFSymbols.leftArrow
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = SFSymbols.leftArrow
     }
-
+    
 }

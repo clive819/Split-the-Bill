@@ -36,9 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-extension AppDelegate {
+private extension AppDelegate {
     
-    private func cleanUp() {
+    func cleanUp() {
         do {
             let items = try PersistenceManager.shared.context.fetch(Item.fetchRequest()) as [Item]
             

@@ -87,9 +87,9 @@ class SBTableViewCell: UITableViewCell {
 }
 
 
-extension SBTableViewCell {
+private extension SBTableViewCell {
     
-    private func layoutUI() {
+    func layoutUI() {
         addSubview(containerView)
         
         backgroundColor = Colors.primaryBackground
@@ -108,7 +108,7 @@ extension SBTableViewCell {
         ])
     }
     
-    private func configureContainerView() {
+    func configureContainerView() {
         containerView.addSubviews(indicatorView, stackView)
         
         containerView.backgroundColor = Colors.secondaryBackground
@@ -118,7 +118,7 @@ extension SBTableViewCell {
         configureStackView()
     }
     
-    private func configureIndicatorView() {
+    func configureIndicatorView() {
         if let _ = indicatorView.image {
             configureImageView()
         }else {
@@ -129,8 +129,8 @@ extension SBTableViewCell {
         indicatorView.useAutoLayout()
     }
     
-    private func configureBarView() {
-        indicatorView.backgroundColor = Colors.blue
+    func configureBarView() {
+        indicatorView.backgroundColor = indicatorColor()
         indicatorView.layer.cornerRadius = 2
         
         let padding: CGFloat = 16
@@ -145,8 +145,16 @@ extension SBTableViewCell {
         ])
     }
     
-    private func configureImageView() {
+    func indicatorColor() -> UIColor {
+        if let owners = (object as? Item)?.owners, owners.isEmpty {
+            return Colors.red
+        }
+        return Colors.blue
+    }
+    
+    func configureImageView() {
         indicatorView.backgroundColor = .clear
+        indicatorView.tintColor = indicatorColor()
         indicatorView.layer.cornerRadius = 0
         
         configureIndicatorImage()
@@ -163,7 +171,7 @@ extension SBTableViewCell {
         ])
     }
     
-    private func configureStackView() {
+    func configureStackView() {
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(amountLabel)
         
@@ -180,7 +188,7 @@ extension SBTableViewCell {
         ])
     }
     
-    private func configureIndicatorImage() {
+    func configureIndicatorImage() {
         if let _ = indicatorView.image {
             if object.isSelected {
                 indicatorView.image = SFSymbols.markedCircle

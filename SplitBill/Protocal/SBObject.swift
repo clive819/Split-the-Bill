@@ -12,7 +12,7 @@ protocol SBObject {
     
     var isSelected: Bool { get set }
     var identifier: String { get }
-    var amount: Float { get }
-    var toll: Float { get }
+    var amount: Double { get }
+    var toll: Double { get }
 
 }

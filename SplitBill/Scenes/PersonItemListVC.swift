@@ -57,6 +57,14 @@ extension PersonItemListVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! SBTableViewCell
+        cell.toggleSelection()
+        addOrEditItem(items[indexPath.row]) { [weak self] (item) in
+            self?.items[indexPath.row] = item
+        }
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return UISwipeActionsConfiguration(actions: [createDeleteAction(indexPath: indexPath)])
     }

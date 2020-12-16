@@ -35,9 +35,9 @@ class PeopleVC: SBTableViewController {
 }
 
 
-extension PeopleVC {
+private extension PeopleVC {
     
-    private func personExist(name: String) -> Bool {
+    func personExist(name: String) -> Bool {
         for person in people {
             if person.name.lowercased() == name.lowercased() {
                 return true
@@ -47,7 +47,7 @@ extension PeopleVC {
     }
     
     @objc
-    private func addPerson() {
+    func addPerson() {
         let alert = UIAlertController(title: "Add Person", message: nil, preferredStyle: .alert)
         
         alert.addTextField { (textField) in

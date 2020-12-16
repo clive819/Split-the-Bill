@@ -24,13 +24,18 @@ class SBTitleLabel: UILabel {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+}
+
+
+private extension SBTitleLabel {
     
-    private func configure() {
+    func configure() {
         textColor = Colors.primary
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
         lineBreakMode = .byTruncatingTail
         useAutoLayout()
     }
-
+    
 }

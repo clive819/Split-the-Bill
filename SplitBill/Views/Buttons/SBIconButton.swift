@@ -32,9 +32,9 @@ class SBIconButton: UIButton {
 }
 
 
-extension SBIconButton {
+private extension SBIconButton {
     
-    private func configure() {
+    func configure() {
         backgroundColor = Colors.primaryBackground
         setImage(icon, for: .normal)
         contentVerticalAlignment = .fill

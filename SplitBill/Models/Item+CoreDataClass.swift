@@ -33,12 +33,12 @@ extension Item: SBObject {
         return name
     }
     
-    var amount: Float {
+    var amount: Double {
         guard let count = owners?.count else { return value }
-        return (value * (1 + tax / 100)) / max(1, Float(count))
+        return (value * (1 + (tax / 100))) / max(1, Double(count))
     }
     
-    var toll: Float {
+    var toll: Double {
         return tax
     }
 

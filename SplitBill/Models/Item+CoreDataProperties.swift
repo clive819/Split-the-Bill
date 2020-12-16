@@ -17,8 +17,8 @@ extension Item {
     }
 
     @NSManaged public var name: String
-    @NSManaged public var tax: Float
-    @NSManaged public var value: Float
+    @NSManaged public var tax: Double
+    @NSManaged public var value: Double
     @NSManaged public var owners: Set<Person>?
 
 }
